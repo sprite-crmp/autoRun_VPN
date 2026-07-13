@@ -95,7 +95,9 @@ def start_vpn():
     input(Fore.RESET + "Нажмите Enter для продолжения...")
 
 while is_windows_locked():
-    print("Экран Windows заблокирован. Ожидаю разблокировки...")
+    print("\rЭкран Windows заблокирован. Ожидаю разблокировки...",
+          end="",
+          flush=True)
     time.sleep(5)
 
 get_window()
