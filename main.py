@@ -93,7 +93,7 @@ def start_vpn():
     input(Fore.RESET + "Нажмите Enter для продолжения...")
 
 while is_windows_locked():
-    print(Fore.RED + f"Экран Windows заблокирован. Ожидаю разблокировки... Попытка: ({trying_locked})" + Fore.RESET,
+    print(Fore.RED + f"\rЭкран Windows заблокирован. Ожидаю разблокировки... Попытка: ({trying_locked})" + Fore.RESET,
           end="",
           flush=True)
     trying_locked = trying_locked + 1
@@ -101,3 +101,5 @@ while is_windows_locked():
 
 if trying_locked != 1: print()
 get_window()
+
+#pyinstaller --onefile --icon icon.ico --name autoRun_VPN main.py
