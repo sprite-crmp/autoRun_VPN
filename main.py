@@ -8,6 +8,7 @@ import pyautogui
 from colorama import Fore
 
 trying = 1
+trying_locked = 1
 user32 = ctypes.windll.User32
 UOI_NAME = 2
 
@@ -80,10 +81,7 @@ def start_vpn():
         except pyautogui.ImageNotFoundException:
             print(
                 Fore.RED +
-                f"\rКнопка включения VPN не найдена на экране. Попытка: ({trying}/5)",
-                end="",
-                flush=True
-            )
+                f"Кнопка включения VPN не найдена на экране. Попытка: ({trying}/5)")
             trying += 1
             time.sleep(3)
 
@@ -95,9 +93,11 @@ def start_vpn():
     input(Fore.RESET + "Нажмите Enter для продолжения...")
 
 while is_windows_locked():
-    print("\rЭкран Windows заблокирован. Ожидаю разблокировки...",
+    print(Fore.RED + f"Экран Windows заблокирован. Ожидаю разблокировки... Попытка: ({trying_locked})" + Fore.RESET,
           end="",
           flush=True)
+    trying_locked = trying_locked + 1
     time.sleep(5)
 
+if trying_locked != 1: print()
 get_window()
