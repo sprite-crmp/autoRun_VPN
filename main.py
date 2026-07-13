@@ -9,6 +9,8 @@ from colorama import Fore
 
 trying = 1
 trying_locked = 1
+window = None
+win = None
 
 with open("assets/config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
@@ -24,6 +26,8 @@ def is_windows_locked():
         return False
 
 def get_window(start=True):
+    global window, win
+
     windows = gw.getWindowsWithTitle(config["window_title"])
 
     if windows:
@@ -78,6 +82,7 @@ def start_vpn():
             pyautogui.click(x, y)
 
             print(Fore.GREEN + "VPN был успешно запущен.")
+            win.minimize()
             return
 
         except pyautogui.ImageNotFoundException:
