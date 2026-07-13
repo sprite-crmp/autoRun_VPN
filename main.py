@@ -1,6 +1,6 @@
+import subprocess
 import json
 import os
-import ctypes
 import time
 import pygetwindow as gw
 import pyautogui
@@ -9,14 +9,16 @@ from colorama import Fore
 
 trying = 1
 trying_locked = 1
-user32 = ctypes.windll.User32
-UOI_NAME = 2
 
 with open("assets/config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
 
 def is_windows_locked():
-    if user32.GetForegroundWindow() % 10 == 0:
+    process_name = 'LogonUI.exe'
+    callall = 'TASKLIST'
+    outputall = subprocess.check_output(callall)
+    outputstringall = str(outputall)
+    if process_name in outputstringall:
         return True
     else:
         return False
